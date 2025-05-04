@@ -4,7 +4,7 @@ USE music_festival;
 
 DROP TABLE IF EXISTS location;
 CREATE TABLE location(
-	latitude DOUBLE NOT NULL CHECK (latitude BETWEEN -90 AND 90),
+    latitude DOUBLE NOT NULL CHECK (latitude BETWEEN -90 AND 90),
     longtitude DOUBLE NOT NULL CHECK (longtitude BETWEEN -180 AND 180),
     address VARCHAR(50) NOT NULL,
     city VARCHAR(50) NOT NULL,
@@ -17,12 +17,12 @@ CREATE TABLE location(
 
 DROP TABLE IF EXISTS festival; 
 CREATE TABLE festival(
-	fest_year YEAR UNIQUE NOT NULL PRIMARY KEY,
+    fest_year YEAR UNIQUE NOT NULL PRIMARY KEY,
     start_date DATE UNIQUE NOT NULL,
     end_date DATE UNIQUE NOT NULL,
     CHECK (end_date>=start_date AND EXTRACT(YEAR FROM start_date)=EXTRACT(YEAR FROM end_date)),
     latitude DOUBLE NOT NULL CHECK (latitude BETWEEN -90 AND 90), 
-	longtitude DOUBLE NOT NULL CHECK (longtitude BETWEEN -180 AND 180),
+    longtitude DOUBLE NOT NULL CHECK (longtitude BETWEEN -180 AND 180),
     CONSTRAINT fest_loc FOREIGN KEY (latitude, longtitude) REFERENCES location(latitude, longtitude),
     fest_poster TEXT,
     fest_desc TEXT
@@ -30,7 +30,7 @@ CREATE TABLE festival(
 
 DROP TABLE IF EXISTS stage;
 CREATE TABLE stage(
-	stage_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    stage_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     stage_name VARCHAR(50) NOT NULL,
     stage_description TEXT NOT NULL,
     max_capacity INT NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE stage(
 
 DROP TABLE IF EXISTS shows; 
 CREATE TABLE shows(
-	show_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    show_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fest_year YEAR NOT NULL,
     stage_id INT NOT NULL,
     show_date DATE NOT NULL,
@@ -52,14 +52,14 @@ CREATE TABLE shows(
 
 DROP TABLE IF EXISTS equipment;
 CREATE TABLE equipment(
-	device VARCHAR(50) PRIMARY KEY,
+    device VARCHAR(50) PRIMARY KEY,
     device_img TEXT,
     device_desc TEXT
 );
 
 DROP TABLE IF EXISTS equip_req;
 CREATE TABLE equip_req(
-	stage_id INT NOT NULL,
+    stage_id INT NOT NULL,
     device VARCHAR(50) NOT NULL,
     quantity INT NOT NULL CHECK (quantity>0),
     PRIMARY KEY (stage_id, device),
@@ -69,7 +69,7 @@ CREATE TABLE equip_req(
 
 DROP TABLE IF EXISTS staff;
 CREATE TABLE staff(
-	staff_ID INT NOT NULL PRIMARY KEY,
+    staff_ID INT NOT NULL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     age INT NOT NULL CHECK (age>0),
@@ -83,7 +83,7 @@ CREATE TABLE staff(
 
 DROP TABLE IF EXISTS staff_req;
 CREATE TABLE staff_req(
-	stage_id INT NOT NULL,
+    stage_id INT NOT NULL,
     specialty VARCHAR(50) CHECK (specialty IN ('Technical', 'Security', 'Assistants')),
     quantity INT NOT NULL CHECK (quantity>0),
     PRIMARY KEY (stage_id, specialty),
@@ -92,7 +92,7 @@ CREATE TABLE staff_req(
 
 DROP TABLES IF EXISTS artist;
 CREATE TABLE artist(
-	artist_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    artist_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     artist_name VARCHAR(50) NOT NULL,
     alias VARCHAR(50),
     birthday DATE NOT NULL,
@@ -106,10 +106,10 @@ CREATE TABLE artist(
 
 DROP TABLES IF EXISTS band;
 CREATE TABLE band(
-	band_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    band_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     band_name VARCHAR(50) NOT NULL,
     formed_date DATE NOT NULL,
-	website VARCHAR(100) CHECK (website LIKE 'https://%'),
+    website VARCHAR(100) CHECK (website LIKE 'https://%'),
     instagram VARCHAR(31) CHECK (instagram LIKE '@%'),
     band_img TEXT,
     band_desc TEXT
@@ -117,7 +117,7 @@ CREATE TABLE band(
 
 DROP TABLE IF EXISTS membership;
 CREATE TABLE membership(
-	artist_id INT NOT NULL,
+    artist_id INT NOT NULL,
     band_id INT NOT NULL,
     PRIMARY KEY (artist_id, band_id),
     CONSTRAINT FOREIGN KEY (artist_id) REFERENCES artist(artist_id),
@@ -126,8 +126,8 @@ CREATE TABLE membership(
 
 DROP TABLE IF EXISTS performance;
 CREATE TABLE performance(
-	performance_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	style VARCHAR(50) CHECK (style IN ('Warm Up', 'Headline', 'Special Guest')),
+    performance_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    style VARCHAR(50) CHECK (style IN ('Warm Up', 'Headline', 'Special Guest')),
     start_time TIME NOT NULL,
     duration TIME NOT NULL CHECK (duration<'03:00:00'),
     artist_id INT,
@@ -145,7 +145,7 @@ CREATE TABLE performance(
 
 DROP TABLE IF EXISTS person;
 CREATE TABLE person(
-	person_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    person_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     phone_number VARCHAR(16) NOT NULL CHECK (phone_number LIKE '+%'),
@@ -154,7 +154,7 @@ CREATE TABLE person(
 
 DROP TABLE IF EXISTS ticket;
 CREATE TABLE ticket(
-	ticket_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ticket_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     purchase_date DATE NOT NULL,
     ticket_category VARCHAR(50) NOT NULL,
     price DECIMAL(5,2) NOT NULL,
@@ -167,8 +167,8 @@ CREATE TABLE ticket(
 
 DROP TABLE IF EXISTS buyer_queue;
 CREATE TABLE buyer_queue(
-	buyer_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	category_interest VARCHAR(50),
+    buyer_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    category_interest VARCHAR(50),
     btimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     ticket_id INT,
     performance_id INT,
@@ -181,7 +181,7 @@ CREATE TABLE buyer_queue(
 
 DROP TABLE IF EXISTS seller_queue;
 CREATE TABLE seller_queue(
-	seller_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    seller_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     stimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     person_id INT NOT NULL,
     ticket_id INT NOT NULL,
@@ -191,8 +191,8 @@ CREATE TABLE seller_queue(
 
 DROP TABLE IF EXISTS review;
 CREATE TABLE review(
-	review_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	rendition INT CHECK (rendition BETWEEN 1 AND 5),
+    review_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    rendition INT CHECK (rendition BETWEEN 1 AND 5),
     sound_lighting INT CHECK (sound_lighting BETWEEN 1 AND 5),
     staging INT CHECK (staging BETWEEN 1 AND 5),
     organisation INT CHECK (organisation BETWEEN 1 AND 5),
