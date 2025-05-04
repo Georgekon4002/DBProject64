@@ -159,7 +159,7 @@ CREATE TABLE ticket(
     ticket_category VARCHAR(50) NOT NULL,
     price DECIMAL(5,2) NOT NULL,
     payment_method VARCHAR(50) NOT NULL CHECK (payment_method IN ('Credit Card', 'Debit Card', 'Bank Account')),
-    EAN13_code BIGINT NOT NULL,
+    EAN13_code BIGINT UNIQUE NOT NULL,
     activation BOOL NOT NULL,
     person_id INT NOT NULL,
     show_id INT NOT NULL,
