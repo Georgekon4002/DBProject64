@@ -154,7 +154,7 @@ CREATE TABLE person(
 
 DROP TABLE IF EXISTS ticket;
 CREATE TABLE ticket(
-    ticket_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	ticket_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     purchase_date DATE NOT NULL,
     ticket_category VARCHAR(50) NOT NULL,
     price DECIMAL(5,2) NOT NULL,
@@ -162,7 +162,9 @@ CREATE TABLE ticket(
     EAN13_code BIGINT NOT NULL,
     activation BOOL NOT NULL,
     person_id INT NOT NULL,
-    CONSTRAINT holder FOREIGN KEY (person_id) REFERENCES person(person_id)
+    show_id INT NOT NULL,
+    CONSTRAINT holder FOREIGN KEY (person_id) REFERENCES person(person_id),
+    CONSTRAINT show_info FOREIGN KEY (show_id) REFERENCES shows(show_id)
 );
 
 DROP TABLE IF EXISTS buyer_queue;
@@ -191,12 +193,14 @@ CREATE TABLE seller_queue(
 
 DROP TABLE IF EXISTS review;
 CREATE TABLE review(
-    review_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    rendition INT CHECK (rendition BETWEEN 1 AND 5),
+	review_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	rendition INT CHECK (rendition BETWEEN 1 AND 5),
     sound_lighting INT CHECK (sound_lighting BETWEEN 1 AND 5),
     staging INT CHECK (staging BETWEEN 1 AND 5),
     organisation INT CHECK (organisation BETWEEN 1 AND 5),
     total INT CHECK (total BETWEEN 1 AND 5),
     ticket_id INT NOT NULL,
-    CONSTRAINT reviewer FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id)
+    performance_id INT NOT NULL,
+    CONSTRAINT reviewer FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id),
+    CONSTRAINT perf_info FOREIGN KEY (performance_id) REFERENCES performance(performance_id)
 );
