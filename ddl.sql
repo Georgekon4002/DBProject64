@@ -156,7 +156,7 @@ DROP TABLE IF EXISTS ticket;
 CREATE TABLE ticket(
 	ticket_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     purchase_date DATE NOT NULL,
-    ticket_category VARCHAR(50) NOT NULL,
+    category VARCHAR(50) NOT NULL CHECK (category IN ('General', 'VIP', 'Backstage')),
     price DECIMAL(5,2) NOT NULL,
     payment_method VARCHAR(50) NOT NULL CHECK (payment_method IN ('Credit Card', 'Debit Card', 'Bank Account')),
     EAN13_code BIGINT UNIQUE NOT NULL,
