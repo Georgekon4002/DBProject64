@@ -6,10 +6,11 @@ DROP TABLE IF EXISTS location;
 CREATE TABLE location(
     latitude DOUBLE NOT NULL CHECK (latitude BETWEEN -90 AND 90),
     longtitude DOUBLE NOT NULL CHECK (longtitude BETWEEN -180 AND 180),
-    address VARCHAR(50) NOT NULL,
+    address VARCHAR(50) NOT NULL, 
     city VARCHAR(50) NOT NULL,
     country VARCHAR(50) NOT NULL,
     continent VARCHAR(50) NOT NULL CHECK (continent IN ('Europe', 'Asia', 'North America', 'South America', 'Africa', 'Oceania')),
+    gs1_prefix INT NOT NULL CHECK (gs1_prefix BETWEEN 100 AND 999),
     PRIMARY KEY (latitude,longtitude),
     loc_img TEXT,
     loc_desc TEXT
@@ -25,7 +26,8 @@ CREATE TABLE festival(
     longtitude DOUBLE NOT NULL CHECK (longtitude BETWEEN -180 AND 180),
     CONSTRAINT fest_loc FOREIGN KEY (latitude, longtitude) REFERENCES location(latitude, longtitude),
     fest_poster TEXT,
-    fest_desc TEXT
+    fest_desc TEXT,
+    CONSTRAINT unique_location UNIQUE (latitude, longtitude)
 );
 
 DROP TABLE IF EXISTS stage;
@@ -97,7 +99,7 @@ CREATE TABLE staff_req(
     CONSTRAINT show_req FOREIGN KEY (show_id) REFERENCES shows(show_id)
 );
 
-DROP TABLES IF EXISTS artist;
+DROP TABLE IF EXISTS artist;
 CREATE TABLE artist(
     artist_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     artist_name VARCHAR(50) NOT NULL,
@@ -111,7 +113,7 @@ CREATE TABLE artist(
     artist_desc TEXT
 );
 
-DROP TABLES IF EXISTS band;
+DROP TABLE IF EXISTS band;
 CREATE TABLE band(
     band_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     band_name VARCHAR(50) NOT NULL,
