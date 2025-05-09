@@ -380,3 +380,23 @@ END//
 DELIMITER ;
 
 -- Buyer/Seller FIFO
+
+-- If we insert staff requirement we check if there is already requested
+DROP TRIGGER IF EXISTS staff_req_check;
+DELIMITER //
+CREATE TRIGGER staff_req_check
+BEFORE INSERT ON staff_req
+FOR EACH ROW
+BEGIN
+  DECLARE existing_req_count INT;
+
+  SELECT COUNT(*) INTO existing_req_count
+  FROM staff_req sr
+  WHERE sr.show_id = NEW.show_id
+    AND sr.specialty = NEW.specialty;
+
+  IF existing_req_count > 0 THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Staff requirement already exists for this show. Update it instead.';
+  END IF;
+END//

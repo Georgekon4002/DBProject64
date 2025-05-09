@@ -105,12 +105,21 @@ CREATE TABLE artist(
     artist_name VARCHAR(50) NOT NULL,
     alias VARCHAR(50),
     birthday DATE NOT NULL,
-    genre VARCHAR(50) NOT NULL,
-    subgenre VARCHAR(50) NOT NULL,
+    -- genre VARCHAR(50) NOT NULL,
+    -- subgenre VARCHAR(50) NOT NULL,
     website VARCHAR(100) CHECK (website LIKE 'https://%'),
     instagram VARCHAR(31) CHECK (instagram LIKE '@%'),
     artist_img TEXT,
     artist_desc TEXT
+);
+
+DROP TABLE IF EXISTS artist_genres;
+CREATE TABLE artist_genres(
+    artist_id INT NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    subgenre VARCHAR(50),
+    PRIMARY KEY (artist_id, genre),
+    CONSTRAINT FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
 );
 
 DROP TABLE IF EXISTS band;

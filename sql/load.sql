@@ -58,7 +58,6 @@ INSERT INTO stages (stage_id, stage_name, stage_description, max_capacity, stage
 (29, 'SoHo Groove', 'Indie NY sounds', 3200, 'https://example.com/soho-groove.jpg', 'A stage for indie sounds in SoHo.'),
 (30, 'Brooklyn Beats', 'Urban performance hub', 3900, 'https://example.com/brooklyn-beats.jpg','A performance hub in Brooklyn with urban vibes.');
 
-
 -- Shows (X)
 INSERT INTO shows (show_id, fest_year, stage_id, show_date, show_poster, show_desc) VALUES
 
@@ -97,7 +96,7 @@ INSERT INTO artists (artist_id, artist_name, alias, birthday, genre, subgenre, w
 (14, 'Shawn Mendes', NULL, '1998-08-08', 'Pop', NULL, 'https://www.shawnmendesofficial.com', '@shawnmendes', 'https://example.com/shawn_mendes.jpg', 'A Canadian singer-songwriter.'),
 (15, 'Halsey', NULL, '1994-09-29', 'Pop', NULL, 'https://www.halsey.com', '@halsey', 'https://example.com/halsey.jpg', 'An American singer and songwriter.'),
 (16, 'Sam Smith', NULL, '1992-05-19', 'Pop', 'Soul', 'https://www.samsmithworld.com', '@samsmith', 'https://example.com/sam_smith.jpg', 'An English singer-songwriter known for their soulful voice.'),
-(17, 'Miley Cyrus', NULL, '1992-11-23', 'Pop', NULL, 'https://www.mileycyrus.com', '@mileycyrus', 'https://example.com/miley_cyrus.jpg', 'An American singer and actress.'),
+(17, 'Miley Cyrus', NULL, '1992-11-23', 'Pop', 'Rock', 'https://www.mileycyrus.com', '@mileycyrus', 'https://example.com/miley_cyrus.jpg', 'An American singer and actress.'),
 (18, 'Sia', NULL, '1975-12-18', 'Pop', NULL, 'https://www.siamusic.net', '@sia', 'https://example.com/sia.jpg', 'An Australian singer-songwriter known for her distinctive voice.'),
 (19, 'Lorde', NULL, '1996-11-07', 'Pop', 'Electropop', 'https://www.lorde.co.nz', '@lorde', 'https://example.com/lorde.jpg', 'A New Zealand singer-songwriter known for her unique sound.'),
 (20, 'Dua Lipa', NULL, '1995-08-22', 'Pop', NULL, 'https://www.dualipa.com', '@dualipa', 'https://example.com/dua_lipa.jpg', 'An English singer and songwriter.');
