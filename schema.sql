@@ -127,10 +127,21 @@ CREATE TABLE band(
     band_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     band_name VARCHAR(50) NOT NULL,
     formed_date DATE NOT NULL,
+    --genre VARCHAR(50) NOT NULL,
+    --subgenre VARCHAR(50),
     website VARCHAR(100) CHECK (website LIKE 'https://%'),
     instagram VARCHAR(31) CHECK (instagram LIKE '@%'),
     band_img TEXT,
     band_desc TEXT
+);
+
+DROP TABLE IF EXISTS band_genres;
+CREATE TABLE band_genres(
+    band_id INT NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    subgenre VARCHAR(50),
+    PRIMARY KEY (band_id, genre),
+    CONSTRAINT FOREIGN KEY (band_id) REFERENCES band(band_id)
 );
 
 DROP TABLE IF EXISTS membership;
