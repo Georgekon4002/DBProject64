@@ -1,4 +1,5 @@
--- 8) Find the assistant staff that doesn't have anything to do on a certain day
+-- 8) Find the assistant staff that doesn't have anything to do on a certain 
+
 SELECT s.staff_id, s.first_name, s.last_name
 FROM staff s
 WHERE s.specialty = 'Assistant' AND s.staff_id NOT IN (

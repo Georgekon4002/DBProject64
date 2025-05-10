@@ -1,4 +1,5 @@
 -- 2) Find all artists of a certain genre with an index if they participated in shows of a certain year's festival
+
 -- SELECT a.artist_id, a.artist_name, a.genre
 -- FROM artist a
 -- WHERE genre = 'rock' AND 

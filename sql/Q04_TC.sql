@@ -1,4 +1,5 @@
 -- 4) For a certain artist/band, find the average review (rendition) and average total rating
+
 -- SELECT a.artist_id, a.artist_name, 
 --     AVG(r.rendition) AS avg_rendition, 
 --     AVG(r.total) AS avg_total,

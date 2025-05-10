@@ -1,5 +1,6 @@
-SELECT 
-    f.fest_year,
+-- 7) Find the festival year with the least average experience of technical staff
+
+SELECT f.fest_year,
     AVG(
         CASE s.experience
             WHEN 'Intern' THEN 1

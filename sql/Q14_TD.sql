@@ -1,4 +1,5 @@
 -- 14) Find the genres that had the same amount of appearances for 2 consecutive years with at leat 3 appearances per year
+
 WITH genre_performances AS (
   SELECT s.fest_year AS fest, a.genre AS genre, COUNT(*) AS appearances
   FROM performance p
